@@ -42,7 +42,7 @@ export default function Header() {
           <a href="#skills" className="hover:text-purple-400 transition">Skills</a>
           <a href="#contact" className="hover:text-purple-400 transition">Contact</a>
           <a 
-            href="/resume.pdf" 
+            href="/resumeZ.pdf" 
             target="_blank" 
             className="ml-4 px-4 py-2 rounded-lg font-semibold text-white bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 hover:from-pink-500 hover:via-red-500 hover:to-purple-400 transition-all"
           >

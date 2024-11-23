@@ -1,8 +1,49 @@
-// components/Contact.js
 "use client";
+import { useState } from "react";
 import { FaEnvelope, FaUser, FaPaperPlane } from "react-icons/fa";
+import emailjs from "emailjs-com";
 
 export default function Contact() {
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [status, setStatus] = useState("");
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Validate form data
+    if (!formData.name || !formData.email || !formData.message) {
+      setStatus("Please fill out all fields.");
+      return;
+    }
+
+    try {
+      const result = await emailjs.send(
+        "service_lgj5jir", // Replace with your EmailJS Service ID
+        "template_4w7tiek", // Replace with your EmailJS Template ID
+        {
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          year: new Date().getFullYear(),
+        },
+        "O0ketBSBwFgXx7y68" // Replace this with your actual Public Key
+      );
+      
+      if (result.text === "OK") {
+        setStatus("Message sent successfully!");
+        setFormData({ name: "", email: "", message: "" }); // Reset form
+      }
+    } catch (error) {
+      console.error("EmailJS Error:", error);
+      setStatus("Failed to send the message. Please try again later.");
+    }
+  };
+
   return (
     <section
       id="contact"
@@ -21,12 +62,18 @@ export default function Contact() {
         </h2>
 
         {/* Contact Form */}
-        <form className="space-y-6 bg-white p-8 rounded-lg shadow-lg">
+        <form
+          onSubmit={handleSubmit}
+          className="space-y-6 bg-white p-8 rounded-lg shadow-lg"
+        >
           {/* Name Input */}
           <div className="relative">
             <FaUser className="absolute left-4 top-3 text-gray-400 text-xl" />
             <input
               type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleInputChange}
               placeholder="Name"
               className="w-full px-12 py-3 bg-gray-100 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500"
             />
@@ -37,6 +84,9 @@ export default function Contact() {
             <FaEnvelope className="absolute left-4 top-3 text-gray-400 text-xl" />
             <input
               type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleInputChange}
               placeholder="Email"
               className="w-full px-12 py-3 bg-gray-100 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500"
             />
@@ -44,6 +94,9 @@ export default function Contact() {
 
           {/* Message Input */}
           <textarea
+            name="message"
+            value={formData.message}
+            onChange={handleInputChange}
             placeholder="Your Message"
             rows="5"
             className="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500"
@@ -59,15 +112,28 @@ export default function Contact() {
           </button>
         </form>
 
+        {/* Form Status */}
+        {status && (
+          <p
+            className={`mt-4 text-center ${
+              status.includes("successfully")
+                ? "text-green-600"
+                : "text-red-600"
+            }`}
+          >
+            {status}
+          </p>
+        )}
+
         {/* Contact Information */}
         <div className="mt-12 text-center">
           <p className="text-lg">
             Feel free to reach out to me via email at{" "}
             <a
-              href="mailto:zeineb.haraketi@esprit.tn"
+              href="mailto:zeinebharaketi298@gmail.com"
               className="text-purple-600 hover:text-pink-500 transition"
             >
-              zeineb.haraketi@esprit.tn
+              zeinebharaketi298@gmail.com
             </a>
           </p>
           <p className="text-lg mt-2">

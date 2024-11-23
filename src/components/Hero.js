@@ -54,7 +54,7 @@ export default function Hero() {
         {/* Social Media Icons with Hover Effects */}
         <div className="flex space-x-4 text-2xl">
           <a
-            href="https://linkedin.com"
+            href="https://www.linkedin.com/in/zeineb-haraketi-410018319/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-gray-300 hover:text-blue-500 transition transform hover:scale-110"
@@ -62,7 +62,7 @@ export default function Hero() {
             <FaLinkedin />
           </a>
           <a
-            href="https://github.com"
+            href="https://github.com/ZeinebHaraketi"
             target="_blank"
             rel="noopener noreferrer"
             className="text-gray-300 hover:text-gray-500 transition transform hover:scale-110"
@@ -70,7 +70,7 @@ export default function Hero() {
             <FaGithub />
           </a>
           <a
-            href="mailto:your-email@example.com"
+            href="mailto:zeineb.haraketi@esprit.tn "
             className="text-gray-300 hover:text-red-500 transition transform hover:scale-110"
           >
             <FaEnvelope />
